@@ -10,6 +10,7 @@ const FormRow = ({type, name, labelText, Default}) => {
         type={type}
         className="form-input"
         id={name}
+        name={name}
         required
         defaultValue={Default}
       />

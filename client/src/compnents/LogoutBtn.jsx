@@ -3,11 +3,19 @@ import { useState } from "react";
 import { DashboardContext } from "../pages/DashboardLayout";
 import Wrapper from "../assets/wrappers/LogoutContainer";
 import { FaUserCircle, FaCaretDown } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import customFetch from "../utils/customFetch";
+import { toast } from "react-toastify";
 
 const LogoutBtn = () => {
-  const { user, LogoutUser } = React.useContext(DashboardContext);
+  const { user} = React.useContext(DashboardContext);
+  const navigate = useNavigate();
   const [logoutbtn, setLogoutbtn] = useState(false);
-
+    const logoutuser =async ()=>{
+      navigate('/');
+      await customFetch.get('/auth/logout')
+      toast.success('logout successful')  
+    }
   return (
     <Wrapper>
       <button
@@ -15,12 +23,12 @@ const LogoutBtn = () => {
         className="logout-btn btn"
         onClick={() => setLogoutbtn(!logoutbtn)}
       >
-        <FaUserCircle />
+        {user.avatar? <img src={user.avatar} alt="user" className="img" /> : <FaUserCircle/>}
         {user?.name}
         <FaCaretDown />
       </button>
       <div className={logoutbtn ? "dropdown show-dropdown" : "dropdown"}>
-        <button onClick={LogoutUser} type="button" className="dropdown-btn ">
+        <button onClick={logoutuser} type="button" className="dropdown-btn ">
           logout
         </button>
       </div>
