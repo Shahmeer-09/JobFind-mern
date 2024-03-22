@@ -50,10 +50,11 @@ const getStats = async (req, res) => {
   res.status(statusCode.OK).json({ defaultStats, monthlyApplications });
 };
 const gettALljob = async (req, res) => {
+  console.log(req.query)
    const {search, jobStatus, jobType, sort} = req.query;
-  //  const page = Number(req.query.page) || 1;
-  //  const limit = Number(req.query.limit) || 10;
-  //  const skip = (page - 1) * limit;
+   const page = Number(req.query.page) || 1;
+   const limit = Number(req.query.limit) || 10;
+   const skip = (page - 1) * limit;
  
    const queryObject = {
     createdBy: req.user.id,
@@ -77,9 +78,10 @@ const gettALljob = async (req, res) => {
       'z-a': '-position',
     };
      const sortKey = sortOptions[sort] || sortOptions.newest;
-  const jobs = await Job.find(queryObject).sort(sortKey);
-  const totalAmount = await Job.countDocuments(queryObject);
-  res.status(200).json({totalAmount, jobs });
+  const jobs = await Job.find(queryObject).sort(sortKey).skip(skip).limit(limit);
+  const totalcount = await Job.countDocuments(queryObject);
+  const numOfPages = Math.ceil(totalcount / limit);
+  res.status(200).json({totalcount, numOfPages, curerrentpage:page , jobs });
 };
 const createjob = async (req, res) => {
   req.body.createdBy = req.user.id;

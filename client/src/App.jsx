@@ -24,12 +24,12 @@ import { loader as alljobsLoader } from "./pages/AllJobs";
 import { loader as editjobsLoader } from "./pages/EditJob";
 import { loader as adminLoader } from "./pages/Admin";
 import { loader as StatsLoader } from "./pages/Stats";
-const DefaultthemeCheker = () => {
+ export const DefaultthemeCheker = () => {
   const currentTheme = localStorage.getItem("darktheme") === "true";
   document.body.classList.toggle("dark-theme", currentTheme);
   return currentTheme;
 };
-const themeSetter = DefaultthemeCheker();
+ DefaultthemeCheker();
 const router = createBrowserRouter([
   {
     path: "/",
@@ -52,7 +52,7 @@ const router = createBrowserRouter([
       },
       {
         path: "dashboard",
-        element: <DashboardLayout themeSetter={themeSetter} />,
+        element: <DashboardLayout />,
         loader: dashboardLoader,
         children: [
           {

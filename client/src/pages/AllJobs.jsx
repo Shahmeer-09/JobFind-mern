@@ -2,28 +2,29 @@ import React, { useEffect } from "react";
 import { SearchJobCont, JobsContainer } from "../compnents/index";
 import { useLoaderData } from "react-router-dom";
 import { toast } from "react-toastify";
-import Wrapper from "../assets/wrappers/DashboardFormPage";
 import customFetch from "../utils/customFetch";
 import { createContext } from "react";
 
-export const loader = async () => {
+export const loader = async ({request}) => {
   try {
-    const  {data} = await customFetch.get("/jobs/get");
-    return data ;
+    let params = Object.fromEntries([
+      ...new URL(request.url).searchParams.entries(),
+    ]);
+    const { data } = await customFetch.get("/jobs/get", { params });
+    return { data, searchParams: { ...params } };
   } catch (error) {
     toast.error(error?.response?.data?.message);
     return error;
   }
 };
- export const action = async ({ params }) => {
-     
- }
+
 const AlljobsContext = createContext();
 
 const AllJobs = () => {
-  const {jobs}= useLoaderData();
+  const { data, searchParams } = useLoaderData();
+
   return (
-    <AlljobsContext.Provider value={jobs}>
+    <AlljobsContext.Provider value={{ data, searchParams }}>
       <SearchJobCont />
       <JobsContainer />
     </AlljobsContext.Provider>

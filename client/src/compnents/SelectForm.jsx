@@ -1,6 +1,6 @@
 import React from "react";
 
-const SelectForm = ({ name, labelText, list, Default = "" }) => {
+const SelectForm = ({ name, labelText, list, Default = "",onchange }) => {
   return (
     <div className="form-row">
       <label htmlFor="jobStatus" className="form-label">
@@ -11,6 +11,7 @@ const SelectForm = ({ name, labelText, list, Default = "" }) => {
         id={name}
         className="form-select"
         defaultValue={Default}
+        onChange={onchange}
       >
         {list.map((item) => {
           return (

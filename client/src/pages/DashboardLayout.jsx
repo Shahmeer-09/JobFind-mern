@@ -4,7 +4,9 @@ import { SmallSidebar, Navbar, BigSidebar } from "../compnents/index";
 import { Outlet, redirect, useLoaderData } from "react-router-dom";
 import {  createContext } from "react";    
 import customFetch from "../utils/customFetch";
+import {DefaultthemeCheker} from '../App'
  const DashboardContext = createContext();
+ 
 export const loader =async ()=>{
      try {
          const {data }=await customFetch.get ('/user/current-user')
@@ -13,11 +15,11 @@ export const loader =async ()=>{
           return redirect('/')
      }
  }
-const DashboardLayout = ({themeSetter}) => {
+const DashboardLayout = () => {
    const  {rest:user} = useLoaderData()
 
   const [showSidebar, setshowSidebar] = useState(false);
-  const [isDarktheme, setisDarkTheme] = useState(themeSetter);
+  const [isDarktheme, setisDarkTheme] = useState(DefaultthemeCheker());
   const toggletheme = () => {
     const  ThemeNew = !isDarktheme
     setisDarkTheme(ThemeNew);

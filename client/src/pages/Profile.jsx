@@ -6,6 +6,7 @@ import { FormRow } from "../compnents/index";
 import { useOutletContext } from "react-router-dom";
 export const action = async ({ request }) => {
   const formdata = await request.formData();
+  
   const file = formdata.get("avatar");
   if( file && file.size > 500000){
     toast.error("file size is too large")
