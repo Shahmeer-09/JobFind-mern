@@ -5,33 +5,49 @@ import { toast } from "react-toastify";
 import customFetch from "../utils/customFetch";
 import { FormRow, SelectForm } from "../compnents/index";
 import { useLoaderData } from "react-router-dom";
+import { Editjb } from "../api/Jobs";
+import { useQuery } from "@tanstack/react-query";
+const editQuery = (id) => {
+  return {
+    queryKey: ["Edit", id],
+    queryFn: async () => {
+       const {data} =await customFetch.get(`/jobs/get/${id}`);
+      return data.job;
+    },
+  };
+};
 
-
-export const loader = async({params})=>{
-try {
-      const {data}= await customFetch.get(`/jobs/get/${params.id}`)
-     return  data
-} catch (error) {
-      toast.error(error.response?.data?.msg)
-      return redirect('/dashboard/all-jobs')
-}
-}
-export const action = async({params,request})=>{
-    const data =await request.formData()
-    const formdata = Object.fromEntries(data)
+export const loader =
+  (queryClient) =>
+  async ({ params }) => {
     try {
-         await customFetch.patch(`/jobs/update/${params.id}`,formdata)
-         toast.success("job updated succefully")
-          return redirect('/dashboard/all-jobs') 
+      await queryClient.ensureQueryData(editQuery(params.id));
+      return params.id;
     } catch (error) {
-       toast.error(error.response?.data?.message)
-       return error
+      return redirect("/dashboard/all-jobs");
     }
-}
+  };
+export const action =
+  (queryClient) =>
+  async ({ params, request }) => {
+    const data = await request.formData();
+    const formdata = Object.fromEntries(data);
+    try {
+      await customFetch.patch(`/jobs/update/${params.id}`, formdata);
+      queryClient.invalidateQueries(["jobs"]);
+      toast.success("job updated succefully");
+      return redirect("/dashboard/all-jobs");
+    } catch (error) {
+      toast.error(error.response?.data?.msg);
+      return error;
+    }
+  };
 const EditJob = () => {
-const isubmitting = useNavigation().state === "submitting"
-const {job} = useLoaderData()
-console.log(job[0]);
+  const naviagation = useNavigation();
+  const isubmitting = naviagation.state === "submitting";
+  const id = useLoaderData();
+const {data:job}= useQuery(editQuery(id))
+  console.log(job[0]);
   return (
     <Wrapper>
       <Form method="post" className="form">
@@ -64,7 +80,7 @@ console.log(job[0]);
         </div>
       </Form>
     </Wrapper>
-  )
-}
+  );
+};
 
-export default EditJob
+export default EditJob;

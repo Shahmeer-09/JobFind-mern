@@ -5,11 +5,13 @@ import { FormRow } from "../compnents/index";
 import { useNavigate } from "react-router-dom";
 import customFetch from "../utils/customFetch";
 import { toast } from "react-toastify";
-export const action = async ({ request }) => {
+// import { QueryClient } from "@tanstack/react-query";
+export const action =(queryClient)=> async ({ request }) => {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
   try {
     await customFetch.post("/auth/login", data);
+    queryClient.invalidateQueries();
     toast.success("login successful");
     return redirect("/dashboard");
   } catch (error) {

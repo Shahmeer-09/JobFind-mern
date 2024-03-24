@@ -31,6 +31,7 @@
   },
   "scripts": {
     "setup-project": "npm i && cd client &&  npm i",
+    "setup-projection-app":"npm i && cd client &&  npm i && npm run build",
     "dev": " nodemon server.js"
   },
   "keywords": [],

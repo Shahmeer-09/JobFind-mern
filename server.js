@@ -18,14 +18,14 @@ cloudinary.config({
   api_secret:  process.env.CLOUD_API_SECRET,
 });
 app.use(cors());
-app.use(express.static(path.resolve(__dirname, "./public")));
+app.use(express.static(path.resolve(__dirname, "./client/dist")));
 app.use(cookieParser());
 app.use(express.json());
 app.use("/api/jm/jobs", require("./routes/jobRoutes"));
 app.use("/api/jm/auth", require("./routes/authRoutes"));
 app.use("/api/jm/user", require("./routes/userRoutes"));
-app.get("/", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "./public", "index.html"))
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "./client/dist", "index.html"))
 })
 app.use("*", (req, res) => {
   res.status(404).json({ msg: "route not found" });

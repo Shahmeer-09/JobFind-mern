@@ -8,12 +8,13 @@ import customFetch from "../utils/customFetch";
 import { toast } from "react-toastify";
 
 const LogoutBtn = () => {
-  const { user} = React.useContext(DashboardContext);
+  const { user, queryClient} = React.useContext(DashboardContext);
   const navigate = useNavigate();
   const [logoutbtn, setLogoutbtn] = useState(false);
     const logoutuser =async ()=>{
       navigate('/');
       await customFetch.get('/auth/logout')
+      queryClient.invalidateQueries(["user"]);
       toast.success('logout successful')  
     }
   return (

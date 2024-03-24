@@ -9,4 +9,5 @@ export {default as SearchJobCont} from './SearchJobCont'
 export {default as StatsContainer} from './StatsContainer'
 export {default as ChartContainer} from './ChartContainer'
 export {default as StatItem} from './StatItem'
+export {default as Loading} from './Loading'
 

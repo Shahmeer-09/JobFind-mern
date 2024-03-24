@@ -6,11 +6,12 @@ import { toast } from "react-toastify";
 import customFetch from "../utils/customFetch";
 import { FormRow, SelectForm } from "../compnents/index";
 import { useOutletContext } from "react-router-dom";
-export const action = async ({ request }) => {
+export const action =(querClient)=> async ({ request }) => {
   const data = await request.formData();
   const formdata = Object.fromEntries(data);
   try {
     await customFetch.post("/jobs/create", formdata);
+    queryClient.invalidateQueries(["jobs"]);
     toast.success("job created succefully");
     return redirect('all-jobs');
   } catch (error) {
