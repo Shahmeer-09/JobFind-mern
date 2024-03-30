@@ -1,5 +1,4 @@
-
-##JobsDiary
+<h1>JobsDiary</h1>
 
 This app is used to keep track of your consistency of how many jobs u have applied for and all that stuff related to it 
 
