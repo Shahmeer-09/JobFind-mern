@@ -11,6 +11,7 @@ const register = async (req, res) => {
   res.status(StatusCodes.CREATED).json({ user });
 };
 const login = async (req, res) => {
+  
   const { email, password } = req.body;
   const user = await User.findOne({ email });
   const validpwd = await matchPWd(password, user.password);
@@ -29,6 +30,7 @@ const login = async (req, res) => {
     secure: process.env.NODE_ENV === "production",
   });
   const { password: pwd, ...rest } = user._doc;
+  console.log(rest);
   res.status(StatusCodes.OK).json({ rest, token });
 };
 const logout = async (req, res) => {
