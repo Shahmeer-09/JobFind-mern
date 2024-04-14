@@ -35,6 +35,9 @@ app.use(errorHandlermiddlerware);
 
 try {
   connectDb();
+  app.listen(process.env.PORT, () => {
+    console.log(`server is running on port ${process.env.PORT && 5100 }`);
+  })
 } catch (error) {
   console.log(error);
   process.exit(1);
