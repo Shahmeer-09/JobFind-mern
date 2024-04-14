@@ -13,7 +13,7 @@ try {
   const jsonjobs = JSON.parse(
     await fs.readFile(path.join(__dirname, "utils", "jobData.json"), "utf-8")
   );
-  console.log(__dirname);
+
   const jobs = jsonjobs.map((job) => {
     return { ...job, createdBy: user._id };
   });

@@ -38,5 +38,7 @@ userSchema.pre("save", async function (next) {
   }
 });
 
+userSchema.po
+
 const User = mongoose.model("User", userSchema);
 module.exports = User;

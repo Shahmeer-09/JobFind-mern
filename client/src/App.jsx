@@ -5,13 +5,13 @@ import {
   Error,
   Landing,
   Login,
-  EditJob,
-  Register,
+  EditJob,    
   AddJob,
   AllJobs,
   Stats,
   Profile,
   Admin,
+  Register
 } from "./pages/index";
 import Errorelem from "./compnents/Errorelem"
 import { action as regAction } from "./pages/Register";
