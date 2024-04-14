@@ -26,12 +26,13 @@
     "multer": "^1.4.5-lts.1",
     "nanoid": "^5.0.6",
     "nodemon": "^3.1.0",
+    "path": "^0.12.7",
     "react": "^18.2.0",
     "recharts": "^2.12.3"
   },
   "scripts": {
     "setup-project": "npm i && cd client &&  npm i",
-    "setup-projection-app":"npm i && cd client &&  npm i && npm run build",
+    "setup-projection-app": "npm i && cd client &&  npm i && npm run build",
     "dev": " nodemon server.js"
   },
   "keywords": [],
