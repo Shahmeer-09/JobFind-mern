@@ -39,3 +39,4 @@ try {
   console.log(error);
   process.exit(1);
 }
+module.exports = app;
