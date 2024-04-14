@@ -32,12 +32,9 @@ app.use("*", (req, res) => {
 });
 app.use(errorHandlermiddlerware);
 
-const port = process.env.PORT || 5100;
+
 try {
   connectDb();
-  app.listen(port, () => {
-    console.log(`server is running on port ${port}`);
-  });
 } catch (error) {
   console.log(error);
   process.exit(1);

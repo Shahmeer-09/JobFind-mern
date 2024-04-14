@@ -7,7 +7,7 @@ export default defineConfig({
   server:{
     proxy: {
       "/api": {
-        target: '',
+        target: 'https://job-diary-tawny.vercel.app/',
          secure:false,
       }
     },
