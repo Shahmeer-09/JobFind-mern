@@ -2,6 +2,7 @@ import customFetch from "../utils/customFetch";
 
 export async function getStats() {
   const response = await customFetch.get("/jobs/stats");
+  console.log(response.data);
   return response.data;
 }
 export async function getCurrentUser() {

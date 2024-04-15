@@ -83,7 +83,7 @@ const gettALljob = async (req, res) => {
     .limit(limit);
   const totalcount = await Job.countDocuments(queryObject);
   const numOfPages = Math.ceil(totalcount / limit);
-  res.status(200).json({ totalcount, numOfPages, curerrentpage: page, jobs });
+  res.status(200).json({ totalcount, numOfPages, currentpage: page, jobs });
 };
 const createjob = async (req, res) => {
   req.body.createdBy = req.user.id;

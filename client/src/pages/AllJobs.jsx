@@ -1,9 +1,6 @@
 import React, { useEffect } from "react";
 import { SearchJobCont, JobsContainer , } from "../compnents/index";
 import { useLoaderData , } from "react-router-dom";
-import customFetch  from "../utils/customFetch";
-import { toast } from "react-toastify";
-
 import { createContext } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getjobs } from "../api/Jobs";
