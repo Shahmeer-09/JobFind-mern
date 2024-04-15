@@ -7,8 +7,8 @@ export default defineConfig({
   server:{
     proxy:{
       '/api':{
-        target: "https://job-find-mern.vercel.app/",
-        secure: false
+        target: "https://job-find-mern.vercel.app",
+        secure: true
       }
     }
   }
