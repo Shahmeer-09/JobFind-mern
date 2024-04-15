@@ -44,7 +44,7 @@ const {rest:user} = data;
   const toggleSidebar = () => {
     setshowSidebar(!showSidebar);
   };
-console.log('im dashbooard')
+
   return (
     <DashboardContext.Provider
       value={{

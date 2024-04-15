@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Pagination from "@mui/material/Pagination";
 
 import { useLocation, useNavigate } from "react-router-dom";
@@ -9,16 +9,17 @@ const PageBtnContainer = () => {
   const {data} = React.useContext(AlljobsContext);
   const { numOfPages, currentpage } = data;
   const [page, setpage]= useState(currentpage)
-  console.log(numOfPages,currentpage);
   const { search, pathname } = useLocation();
   const navigate = useNavigate();
 
   const handlePageChange = ( event,pageNumber) => {
     setpage(pageNumber)
-    const searchParams = new URLSearchParams(search);
-    searchParams.set("page",pageNumber );
-    navigate(`${pathname}?${searchParams.toString()}`);
   };
+  useEffect(()=>{
+    const searchParams = new URLSearchParams(search);
+    searchParams.set("page",page );
+    navigate(`${pathname}?${searchParams.toString()}`);
+  },[])
 
   return (
     <Wrapper>

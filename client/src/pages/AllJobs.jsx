@@ -28,7 +28,6 @@ const AllJobs = () => {
   const {searchParams } = useLoaderData();
   const {data} = useQuery(alljobsQuery(searchParams));
 
-  console.log(data, searchParams);
   return (
     <AlljobsContext.Provider value={{ data, searchParams }}>
       <SearchJobCont />
