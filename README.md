@@ -1,5 +1,5 @@
 <h1>JobsDiary</h1>
- <a href="[https://job-find-mern.vercel.app/">Demo</a>
+ <a href="https://job-find-mern.vercel.app/">Demo</a>
  <br>
  
 This app is used to keep track of your consistency of how many jobs u have applied for and all that stuff related to it 
